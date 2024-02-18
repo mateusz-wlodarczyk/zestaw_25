@@ -31,7 +31,7 @@ export default function GenericComponent<T>({
         <Button type="submit">add</Button>
       </form>
 
-      {showSelectedOptionData.length !== 0 &&
+      {showSelectedOptionData &&
         showSelectedOptionData.map((el, index) => {
           return <Text key={index}>- {el.option}</Text>;
         })}

@@ -14,14 +14,30 @@ export function useGenericHook(selectData: SelectData) {
 
     if (optionOnChange === "" || optionData.length === 0) return;
 
-    const newArrayWithSelectedOption = optionData.filter((el) => {
-      return el.option === optionOnChange;
-    });
+    // const newArrayWithSelectedOption = optionData.filter((el) => {
+    //   return el.option === optionOnChange;
+    // });
 
-    const newArrayWithoutSelectedOption = optionData.filter((el) => {
-      return el.option !== optionOnChange;
-    });
+    // const newArrayWithoutSelectedOption = optionData.filter((el) => {
+    //   return el.option !== optionOnChange;
+    // });
 
+    // console.log(newArrayWithSelectedOption, "newArrayWithSelectedOption");
+    // console.log(newArrayWithoutSelectedOption, "newArrayWithoutSelectedOption");
+
+    const { newArrayWithSelectedOption, newArrayWithoutSelectedOption } =
+      optionData.reduce(
+        (acc, el) => {
+          el.option === optionOnChange
+            ? acc.newArrayWithSelectedOption.push(el)
+            : acc.newArrayWithoutSelectedOption.push(el);
+          return acc;
+        },
+        {
+          newArrayWithSelectedOption: [] as { option: string }[],
+          newArrayWithoutSelectedOption: [] as { option: string }[],
+        }
+      );
     setOptionData(newArrayWithoutSelectedOption);
 
     setSelectedShowOptionData((state) => [
